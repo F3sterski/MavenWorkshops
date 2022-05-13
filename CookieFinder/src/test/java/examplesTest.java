@@ -1,8 +1,8 @@
 import org.junit.jupiter.api.Test;
 
-public class example2Test {
+public class examplesTest {
     @Test
-    public void test2(){
+    public void test(){
         System.out.println("hehesszki");
     }
 }
