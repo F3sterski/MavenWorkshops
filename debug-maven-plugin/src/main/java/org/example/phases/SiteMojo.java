@@ -6,11 +6,15 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 
-@Mojo( name = "dependency-site", defaultPhase = LifecyclePhase.SITE)
+import static org.apache.maven.plugins.annotations.LifecyclePhase.SITE;
+
+@Mojo( name = "dependency-site", defaultPhase = SITE)
 public class SiteMojo extends AbstractMojo {
+
+    static String phase = "SITE";
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
-        getLog().info("SITE");
+        getLog().info(phase);
 
     }
 }

@@ -2,23 +2,121 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+<!--    Project Object Model-->
+
     <modelVersion>4.0.0</modelVersion>
 
-<!--    Coordinates groupId:artifactId:version-->
+<!--    Coordinates groupId:artifactId:version -->
 
     <groupId>org.example</groupId>
     <artifactId>CookieFinder</artifactId>
-
     <version>1.1-SNAPSHOT</version>
+
+<!--    misc -->
+    <developers>
+        <developer>
+            <name>Adam</name>
+        </developer>
+    </developers>
+    <description>Ciasteczkowy potwór</description>
+    <url>nordea.com</url>
+    <organization>
+        <name>Nordea</name>
+    </organization>
+
+<!--    repository -->
+    <distributionManagement>
+        <repository>
+            <id>1</id>
+            <name>My main repo</name>
+            <url>https://someNexus.repo</url>
+        </repository>
+        <snapshotRepository>
+            <id>2</id>
+            <name>Snapshot repo</name>
+        </snapshotRepository>
+    </distributionManagement>
+
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-        <junit.version>5.8.2</junit.version>
+<!--        <junit.version>5.8.2</junit.version>-->
     </properties>
 
     <!--    <packaging>pom</packaging>-->
     <packaging>jar</packaging>
+
+    <dependencies>
+
+        <!--        compile scope example-->
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-common</artifactId>
+            <version>3.3.2</version>
+            <!--  default compile -->
+<!--            <exclusions>-->
+<!--                <exclusion>-->
+<!--                    <groupId>org.apache.hadoop.thirdparty</groupId>-->
+<!--                    <artifactId>hadoop-shaded-guava</artifactId>-->
+<!--                </exclusion>-->
+<!--                <exclusion>-->
+<!--                    <groupId>org.apache.curator</groupId>-->
+<!--                    <artifactId>curator-client</artifactId>-->
+<!--                </exclusion>-->
+<!--            </exclusions>-->
+        </dependency>
+
+
+
+        <!--        runtime scope example-->
+        <dependency>
+            <groupId>org.apache.kerby</groupId>
+            <artifactId>kerb-common</artifactId>
+            <version>2.0.1</version>
+            <scope>runtime</scope>
+        </dependency>
+        <!--   ===============================================    -->
+
+
+        <!--        provided scope example-->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>[,3.12.0]</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!--   ===============================================    -->
+
+
+        <!--        test scope example-->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>31.1-jre</version>
+<!--            <scope>test</scope>-->
+        </dependency>
+
+        <!--   =========== other test dependencies ====================    -->
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.8.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.8.2</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+
     <build>
         <testResources>
             <testResource>
@@ -30,6 +128,12 @@
         </testResources>
 
         <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.3.0</version>
+            </plugin>
 
             <!--   clean plugin setup -->
 
@@ -52,16 +156,18 @@
 
             <!--   surefire (test) plugin setup -->
 
-<!--            <plugin>-->
-<!--                <artifactId>maven-surefire-plugin</artifactId>-->
-<!--                <version>2.22.0</version>-->
-<!--                <configuration>-->
-<!--                    <properties>-->
-<!--                        <project.build.encoding>UTF-8</project.build.encoding>-->
-<!--                        <project.reporting.encoding>UTF-8</project.reporting.encoding>-->
-<!--                    </properties>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.0</version>
+                <configuration>
+                    <properties>
+                        <project.build.encoding>UTF-8</project.build.encoding>
+                        <project.reporting.encoding>UTF-8</project.reporting.encoding>
+                    </properties>
+                    <parallel>classes</parallel>
+                    <threadCount>10</threadCount>
+                </configuration>
+            </plugin>
 
 <!--               failsafe (verify) plugin setup -->
 
@@ -86,6 +192,8 @@
                     </archive>
                 </configuration>
             </plugin>
+
+<!--            super plugin part -->
 
             <plugin>
                 <groupId>org.example</groupId>
@@ -143,82 +251,6 @@
 <!--    </dependencyManagement>-->
 
 
-    <dependencies>
 
-        <!--        compile scope example-->
-        <dependency>
-            <groupId>org.apache.hadoop</groupId>
-            <artifactId>hadoop-common</artifactId>
-            <version>3.3.2</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.apache.hadoop.thirdparty</groupId>
-                    <artifactId>hadoop-shaded-guava</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <!--        runtime scope example-->
-        <dependency>
-            <groupId>org.apache.kerby</groupId>
-            <artifactId>kerb-common</artifactId>
-            <version>2.0.1</version>
-            <scope>runtime</scope>
-        </dependency>
-        <!--   ===============================================    -->
-
-
-        <!--        provided scope example-->
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>[,3.12.0]</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <!--   ===============================================    -->
-
-
-        <!--        test scope example-->
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>31.1-jre</version>
-<!--            <scope>test</scope>-->
-        </dependency>
-
-        <!--   =========== other test dependencies ====================    -->
-
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <!--        exclude dependency example  -->
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate</artifactId>
-            <version>3.2.5.ga</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>javax.transaction</groupId>
-                    <artifactId>jta</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.geronimo.specs</groupId>
-            <artifactId>geronimo-jta_1.1_spec</artifactId>
-            <version>1.1</version>
-        </dependency>
-
-    </dependencies>
 
 </project>

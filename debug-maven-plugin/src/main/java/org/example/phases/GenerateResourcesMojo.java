@@ -8,13 +8,17 @@ import org.apache.maven.plugins.annotations.Mojo;
 
 import java.io.File;
 
-@Mojo( name = "dependency-generate-resources", defaultPhase = LifecyclePhase.GENERATE_RESOURCES)
+import static org.apache.maven.plugins.annotations.LifecyclePhase.GENERATE_RESOURCES;
+
+@Mojo( name = "dependency-generate-resources", defaultPhase = GENERATE_RESOURCES)
 public class GenerateResourcesMojo extends AbstractMojo {
+
+    static String phase = "GENERATE RESOURCES";
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
 
-        getLog().info("GENERATE RESOURCES");
+        getLog().info(phase);
 
         File f = new File("lib\\mockito-all-2.0.2-beta.jar");
         if(f.exists() && !f.isDirectory()) {
@@ -23,6 +27,7 @@ public class GenerateResourcesMojo extends AbstractMojo {
             getLog().info("mockito jar cannot be find");
         }
 
+        getPluginContext().put(phase, System.currentTimeMillis());
 
 
 

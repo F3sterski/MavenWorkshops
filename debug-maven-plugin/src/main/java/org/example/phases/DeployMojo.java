@@ -6,11 +6,16 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 
-@Mojo( name = "dependency-deploy", defaultPhase = LifecyclePhase.DEPLOY)
+import static org.apache.maven.plugins.annotations.LifecyclePhase.DEPLOY;
+
+@Mojo( name = "dependency-deploy", defaultPhase = DEPLOY)
 public class DeployMojo extends AbstractMojo {
+
+    static String phase = "DEPLOY";
+
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
-        getLog().info("DEPLOY");
+        getLog().info(phase);
 
     }
 }

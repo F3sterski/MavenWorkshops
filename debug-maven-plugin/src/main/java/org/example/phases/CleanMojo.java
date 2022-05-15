@@ -8,8 +8,10 @@ import org.apache.maven.project.MavenProject;
 
 import java.io.File;
 
-@Mojo( name = "dependency-clean", defaultPhase = LifecyclePhase.CLEAN)
-@Execute(phase = LifecyclePhase.CLEAN)
+import static org.apache.maven.plugins.annotations.LifecyclePhase.CLEAN;
+
+@Mojo( name = "dependency-clean", defaultPhase = CLEAN)
+@Execute(phase = CLEAN)
 public class CleanMojo extends AbstractMojo {
 
     @Component
@@ -21,8 +23,10 @@ public class CleanMojo extends AbstractMojo {
     @Parameter(defaultValue = "${project.build.directory}${file.separator}")
     private File assemblyOutput;
 
+    static String phase = "CLEAN";
+
     public void execute() throws MojoExecutionException, MojoFailureException {
-        getLog().info("CLEAN");
+        getLog().info(phase);
         getLog().info(mainClass);
         getLog().info(output.getAbsolutePath());
         getLog().info(assemblyOutput.getAbsolutePath());

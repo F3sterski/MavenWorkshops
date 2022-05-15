@@ -3,19 +3,24 @@
 
 //import org.apache.kerby.kerberos.kerb.common.KrbUtil;
 
+//import com.google.common.math.IntMath;
+import com.sun.jersey.json.impl.writer.JsonEncoder;
+import org.apache.hadoop.conf.StorageUnit;
+
 import java.util.concurrent.ExecutorService;
 
 public class Main {
     public static void main(String[] args)  {
 
+        System.out.println(StorageUnit.GB);  //compile Hadoop
 
-        //System.out.println(IntMath.binomial(6, 3));  //test Guava
+//        System.out.println(IntMath.binomial(6, 3));  //test Guava
 
-        //System.out.println(DateUtils.MILLIS_PER_DAY); //compile lang3
+//        System.out.println(DateUtils.MILLIS_PER_DAY); //compile lang3
 
 //        System.out.println(KrbUtil.ANONYMOUS_PRINCIPAL); // runtime hadoop
 
-        //System.out.println(JsonEncoder.encode("{napis:123}"));
+//        System.out.println(JsonEncoder.encode("{napis:123}"));
 
 
         System.out.println("Complated.");

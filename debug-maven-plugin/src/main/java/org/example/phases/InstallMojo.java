@@ -8,7 +8,10 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
 
-@Mojo( name = "dependency-install", defaultPhase = LifecyclePhase.INSTALL)
+import static org.apache.maven.plugins.annotations.LifecyclePhase.INSTALL;
+import static org.apache.maven.plugins.annotations.LifecyclePhase.VERIFY;
+
+@Mojo( name = "dependency-install", defaultPhase = INSTALL)
 public class InstallMojo extends AbstractMojo {
 
     @Parameter(defaultValue = "${project}", required = true, readonly = true)
@@ -19,11 +22,17 @@ public class InstallMojo extends AbstractMojo {
     @Parameter
     private String param;
 
+    static String phase = "INSTALL";
+
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
 
-        getLog().info("INSTALL");
+        getLog().info(phase);
         getLog().info(param);
+
+        long time = System.currentTimeMillis() - (long)getPluginContext().get(VerifyMojo.phase);
+
+        getLog().info("time: " + time  + "ms");
 
     }
 }
